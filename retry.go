@@ -306,6 +306,13 @@ func (e unrecoverableError) Unwrap() error {
 	return e.error
 }
 
+func (e unrecoverableError) Error() string {
+	if e.error == nil {
+		return "unrecoverable error"
+	}
+	return e.error.Error()
+}
+
 // Unrecoverable wraps an error in `unrecoverableError` struct
 func Unrecoverable(err error) error {
 	return unrecoverableError{err}
